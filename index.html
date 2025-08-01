@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PX to VW Font Size Converter</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+	<!-- Casual Meta Tags -->
+	<meta name="description" content="Easily convert font sizes from pixels (px) to viewport width (vw) for responsive design.">
+	<meta name="keywords" content="px to vw, font size converter, responsive typography, css tools">
+	<meta name="author" content="Geethesh Nair">
+	<meta name="theme-color" content="#2563eb" />
+
+	<!-- Social Meta -->
+	<meta property="og:title" content="PX to VW Font Size Converter">
+	<meta property="og:description" content="Convert font sizes from px to vw effortlessly for responsive designs.">
+	<meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=PX+to+VW+Converter" />
+	<meta property="og:type" content="website">
+
+	<!-- Favicon (using Google Material Icons as example) -->
+	<link rel="icon" href="https://fonts.gstatic.com/s/i/materialiconsoutlined/format_size/v18/24px.svg" type="image/svg+xml">
+
+	<style>
+		body {
+			font-family: "Manrope", sans-serif;
+		}
+
+		@media (max-width: 640px) {
+			.mobile-scroll {
+				overflow-x: auto;
+				-webkit-overflow-scrolling: touch;
+			}
+		}
+	</style>
+</head>
+
+
+<body class="min-h-screen bg-gray-50 text-gray-900">
+	<div class="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-8 lg:py-12 max-w-7xl">
+		<!-- Header -->
+		<div class="text-center mb-6 sm:mb-8 lg:mb-12">
+			<h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-2 sm:mb-3 tracking-tight leading-tight">
+				PX → VW Font Size Converter
+			</h1>
+			<p class="text-gray-600 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
+				Convert pixel font sizes to viewport width units for responsive design
+			</p>
+		</div>
+
+		<div class="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+			<!-- Input Panel -->
+			<div class="bg-white rounded-lg sm:rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 lg:p-6">
+				<h2 class="text-base sm:text-lg lg:text-xl font-semibold text-gray-900 mb-3 sm:mb-4 lg:mb-6">
+					Input Configuration
+				</h2>
+
+				<div class="space-y-3 sm:space-y-4 lg:space-y-5">
+					<!-- Font Size Input -->
+					<div>
+						<label for="pxValue" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+							Font Size (px)
+						</label>
+						<input type="number" id="pxValue" placeholder="24" class="w-full p-2 sm:p-2.5 lg:p-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm sm:text-base transition-all duration-200" oninput="convert()" />
+					</div>
+
+					<!-- Viewport Widths -->
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
+						<div>
+							<label for="desktopWidth" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+								Desktop Width
+							</label>
+							<input type="number" id="desktopWidth" value="1728" class="w-full p-2 sm:p-2.5 lg:p-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm sm:text-base transition-all duration-200" oninput="convert()" />
+						</div>
+
+						<div>
+							<label for="mobileWidth" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+								Mobile Width
+							</label>
+							<input type="number" id="mobileWidth" value="430" class="w-full p-2 sm:p-2.5 lg:p-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm sm:text-base transition-all duration-200" oninput="convert()" />
+						</div>
+					</div>
+
+					<!-- Quick Presets -->
+					<div>
+						<label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+							Quick Font Sizes
+						</label>
+						<div class="mobile-scroll">
+							<div class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-4 xl:grid-cols-3 2xl:grid-cols-4 gap-1.5 sm:gap-2 min-w-max sm:min-w-0">
+								<button onclick="setPx(16)" class="px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md sm:rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all duration-200 font-medium whitespace-nowrap">16px</button>
+								<button onclick="setPx(18)" class="px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md sm:rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all duration-200 font-medium whitespace-nowrap">18px</button>
+								<button onclick="setPx(20)" class="px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md sm:rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all duration-200 font-medium whitespace-nowrap">20px</button>
+								<button onclick="setPx(24)" class="px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md sm:rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all duration-200 font-medium whitespace-nowrap">24px</button>
+								<button onclick="setPx(30)" class="px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md sm:rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all duration-200 font-medium whitespace-nowrap">30px</button>
+								<button onclick="setPx(32)" class="px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md sm:rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all duration-200 font-medium whitespace-nowrap">32px</button>
+								<button onclick="setPx(48)" class="px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md sm:rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all duration-200 font-medium whitespace-nowrap col-span-2 sm:col-span-1">48px</button>
+								<button onclick="setPx(64)" class="px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md sm:rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all duration-200 font-medium whitespace-nowrap sm:col-span-1">64px</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Results Panel -->
+			<div class="bg-white rounded-lg sm:rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 lg:p-6">
+				<div class="flex items-center justify-between mb-4 sm:mb-6">
+					<h2 class="text-base sm:text-lg lg:text-xl font-semibold text-gray-900">Conversion Results</h2>
+					<button onclick="clearAll()" class="text-xs sm:text-sm text-gray-500 hover:text-gray-700 px-2 sm:px-3 py-1 sm:py-2 border border-gray-300 rounded-md sm:rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-all duration-200 font-medium">
+						Clear
+					</button>
+				</div>
+
+				<div class="space-y-4 sm:space-y-6">
+					<!-- VW Results -->
+					<div class="space-y-3 sm:space-y-4">
+						<!-- Desktop VW -->
+						<div>
+							<div class="flex items-center justify-between mb-2">
+								<p class="text-xs sm:text-sm font-medium text-gray-700">Desktop VW</p>
+								<span id="desktopPercentage" class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 sm:py-1 rounded-full font-medium">0%</span>
+							</div>
+							<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-blue-50 border border-blue-200 rounded-lg sm:rounded-xl">
+								<code id="desktopOutput" class="text-blue-700 font-mono text-sm sm:text-lg font-semibold flex-1 break-all sm:break-normal text-center sm:text-left py-1 sm:py-0">--</code>
+								<button onclick="copy('desktopOutput')" class="px-3 py-2 text-xs sm:text-sm bg-blue-600 text-white rounded-md sm:rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-all duration-200 font-medium shrink-0">
+									Copy
+								</button>
+							</div>
+						</div>
+
+						<!-- Mobile VW -->
+						<div>
+							<div class="flex items-center justify-between mb-2">
+								<p class="text-xs sm:text-sm font-medium text-gray-700">Mobile VW</p>
+								<span id="mobilePercentage" class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 sm:py-1 rounded-full font-medium">0%</span>
+							</div>
+							<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-green-50 border border-green-200 rounded-lg sm:rounded-xl">
+								<code id="mobileOutput" class="text-green-700 font-mono text-sm sm:text-lg font-semibold flex-1 break-all sm:break-normal text-center sm:text-left py-1 sm:py-0">--</code>
+								<button onclick="copy('mobileOutput')" class="px-3 py-2 text-xs sm:text-sm bg-green-600 text-white rounded-md sm:rounded-lg hover:bg-green-700 active:bg-green-800 transition-all duration-200 font-medium shrink-0">
+									Copy
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<!-- Tailwind Classes -->
+					<div class="bg-gray-50 rounded-lg sm:rounded-xl p-3 sm:p-4">
+						<h3 class="text-sm sm:text-lg font-semibold text-gray-700 mb-2 sm:mb-3">Tailwind CSS Classes</h3>
+						<div class="space-y-2 sm:space-y-3">
+							<div class="bg-white rounded-md sm:rounded-lg p-2.5 sm:p-3 border border-gray-200">
+								<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-2">
+									<div class="text-gray-600 text-xs sm:text-sm font-medium">Mobile Class</div>
+									<button onclick="copyTailwindMobile()" class="text-xs sm:text-sm text-blue-600 hover:text-blue-700 px-2 py-1 border border-blue-300 rounded-md sm:rounded-lg hover:bg-blue-50 active:bg-blue-100 transition-all duration-200 font-medium self-start sm:self-auto">
+										Copy
+									</button>
+								</div>
+								<code id="tailwindMobile" class="text-purple-700 font-mono font-medium block text-xs sm:text-sm break-all">--</code>
+							</div>
+							<div class="bg-white rounded-md sm:rounded-lg p-2.5 sm:p-3 border border-gray-200">
+								<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-2">
+									<div class="text-gray-600 text-xs sm:text-sm font-medium">Desktop Class</div>
+									<button onclick="copyTailwindDesktop()" class="text-xs sm:text-sm text-green-600 hover:text-green-700 px-2 py-1 border border-green-300 rounded-md sm:rounded-lg hover:bg-green-50 active:bg-green-100 transition-all duration-200 font-medium self-start sm:self-auto">
+										Copy
+									</button>
+								</div>
+								<code id="tailwindDesktop" class="text-purple-700 font-mono font-medium block text-xs sm:text-sm break-all">--</code>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Toast Notification -->
+	<div id="toast" class="fixed top-3 sm:top-4 lg:top-6 right-3 sm:right-4 lg:right-6 bg-green-600 text-white px-3 sm:px-4 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg sm:rounded-xl shadow-lg transform translate-x-full transition-transform duration-300 z-50 max-w-xs">
+		<div class="flex items-center space-x-2 sm:space-x-3">
+			<svg class="w-4 h-4 sm:w-5 sm:h-5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+				<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+			</svg>
+			<span class="text-xs sm:text-sm lg:text-base font-medium">Copied to clipboard!</span>
+		</div>
+	</div>
+
+	<script>
+		function convert() {
+			const px = parseFloat(document.getElementById('pxValue').value);
+			const desktopWidth = parseFloat(document.getElementById('desktopWidth').value);
+			const mobileWidth = parseFloat(document.getElementById('mobileWidth').value);
+
+			if (!px || !desktopWidth || !mobileWidth || desktopWidth === 0 || mobileWidth === 0) {
+				resetOutputs();
+				return;
+			}
+
+			const vwDesktop = (px / desktopWidth) * 100;
+			const vwMobile = (px / mobileWidth) * 100;
+
+			// Update VW outputs
+			document.getElementById('desktopOutput').textContent = `${vwDesktop.toFixed(3)}vw`;
+			document.getElementById('mobileOutput').textContent = `${vwMobile.toFixed(3)}vw`;
+
+			// Update percentages
+			document.getElementById('desktopPercentage').textContent = `${vwDesktop.toFixed(1)}%`;
+			document.getElementById('mobilePercentage').textContent = `${vwMobile.toFixed(1)}%`;
+
+			// Generate Tailwind classes
+			const mobileClass = `.text${px}px-mobile`;
+			const desktopClass = `.text${px}px-desktop`;
+
+			document.getElementById('tailwindMobile').textContent = `${mobileClass} { @apply text-[${vwMobile.toFixed(3)}vw]; }`;
+			document.getElementById('tailwindDesktop').textContent = `${desktopClass} { @apply md:!text-[${vwDesktop.toFixed(3)}vw]; }`;
+		}
+
+		function resetOutputs() {
+			document.getElementById('desktopOutput').textContent = '--';
+			document.getElementById('mobileOutput').textContent = '--';
+			document.getElementById('desktopPercentage').textContent = '0%';
+			document.getElementById('mobilePercentage').textContent = '0%';
+			document.getElementById('tailwindMobile').textContent = '--';
+			document.getElementById('tailwindDesktop').textContent = '--';
+			document.getElementById('cssMobileClass').textContent = '--';
+			document.getElementById('cssDesktopClass').textContent = '--';
+			document.getElementById('cssMobile').textContent = '--';
+			document.getElementById('cssDesktop').textContent = '--';
+		}
+
+		function setPx(value) {
+			document.getElementById('pxValue').value = value;
+			convert();
+		}
+
+		function clearAll() {
+			document.getElementById('pxValue').value = '';
+			resetOutputs();
+		}
+
+		function copy(id) {
+			const text = document.getElementById(id).textContent;
+			if (text === '--') return;
+
+			navigator.clipboard.writeText(text).then(() => {
+				showToast();
+			}).catch(() => {
+				// Fallback for older browsers
+				const textArea = document.createElement('textarea');
+				textArea.value = text;
+				document.body.appendChild(textArea);
+				textArea.select();
+				document.execCommand('copy');
+				document.body.removeChild(textArea);
+				showToast();
+			});
+		}
+
+		function copyTailwindMobile() {
+			const mobile = document.getElementById('tailwindMobile').textContent;
+			if (mobile === '--') return;
+
+			navigator.clipboard.writeText(mobile).then(() => {
+				showToast();
+			}).catch(() => {
+				const textArea = document.createElement('textarea');
+				textArea.value = mobile;
+				document.body.appendChild(textArea);
+				textArea.select();
+				document.execCommand('copy');
+				document.body.removeChild(textArea);
+				showToast();
+			});
+		}
+
+		function copyTailwindDesktop() {
+			const desktop = document.getElementById('tailwindDesktop').textContent;
+			if (desktop === '--') return;
+
+			navigator.clipboard.writeText(desktop).then(() => {
+				showToast();
+			}).catch(() => {
+				const textArea = document.createElement('textarea');
+				textArea.value = desktop;
+				document.body.appendChild(textArea);
+				textArea.select();
+				document.execCommand('copy');
+				document.body.removeChild(textArea);
+				showToast();
+			});
+		}
+
+		function showToast() {
+			const toast = document.getElementById('toast');
+			toast.classList.remove('translate-x-full');
+			setTimeout(() => {
+				toast.classList.add('translate-x-full');
+			}, 2000);
+		}
+
+		// Initialize
+		convert();
+	</script>
+</body>
+
+</html>
