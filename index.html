@@ -252,7 +252,7 @@
 				return;
 			}
 
-			const vwDesktop = (px / desktopWidth) * 100;
+			const vwDesktop = (px / desktopWidth) * 100 * 0.9;
 			const vwMobile = (px / mobileWidth) * 100;
 			const vwLargeScreen = largeScreenEnabled ? vwDesktop * largeScreenMultiplier : vwDesktop;
 
